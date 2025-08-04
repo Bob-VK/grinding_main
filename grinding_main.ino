@@ -7,6 +7,7 @@ void setup() {
  Serial.println(FPSTR(DebugON));
    /*/ Настраиваем 8-й пин как выход Serial.begin TODO*/
   pinMode(pin8, OUTPUT);
+  pinMode(pin9, OUTPUT);
   /*  Настраиваем пин светодиода как выход */
   pinMode(ledPin, OUTPUT);
 
@@ -51,7 +52,23 @@ void loop() {
           // Выключаем встроенный светодиод
           digitalWrite(ledPin, LOW);
        }//if (CmdStr.equals(cmdDnOff)) 
+       else if  (CmdStr.equals(cmdUpOn)){ 
+          CmdResult =  CmdResultOK;
+          // Устанавливаем высокий уровень на 8-й пин
+          digitalWrite(pin9, HIGH);
+        
+          // Включаем встроенный светодиод
+          digitalWrite(ledPin, HIGH);          
+       }//if  (CmdStr.equals(cmdUpOn))
        
+       else if  (CmdStr.equals(cmdUpOff)){ 
+          CmdResult =  CmdResultOK;
+          // Устанавливаем низкий уровень на 8-й пин
+          digitalWrite(pin9, LOW);
+        
+          // Выключаем встроенный светодиод
+          digitalWrite(ledPin, LOW);
+       }//if (CmdStr.equals(cmdUpOff))  
       else  if  (CmdStr.equals(SetALLOWANCE)){ 
           ALLOWANCE = CmdParam;
           CmdResult =  CmdResultOK;
@@ -86,7 +103,7 @@ void loop() {
         digitalWrite(pin8, OutDn);
         //  встроенный светодиод
         digitalWrite(ledPin, OutDn);        
-        Serial.print(" осталось  - ");
+        Serial.print(" left  - ");
         Serial.println(CurCountStep,DEC);
 
       }
@@ -96,7 +113,7 @@ void loop() {
         digitalWrite(pin9, OutUp);
         //  встроенный светодиод
         digitalWrite(ledPin, OutUp);
-        Serial.print(" осталось  - ");
+        Serial.print(" left  - ");
         Serial.println(CurCountStep,DEC);        
       }
       else{
@@ -106,13 +123,18 @@ void loop() {
     }  
     {// печать продолжительности цикла
     // Выводим результат в последовательный монитор
-    Serial.print("cycle duration: ");
+    Serial.print("CyD: ");
     Serial.print(loopDuration);
     Serial.print(" -- ");
     Serial.print(PauseMove);   
-    Serial.println(" microseconds");
+    Serial.println(" ms");
     startTime =  endTime;
     }
   }//if ((loopDuration = endTime - startTime)>PauseMove)
-
+  else if ((Serial.availableForWrite()>62)&&(( HBT = (endTime - startTimeHBT))>PauseSend)){
+    //Serial.write('~');
+    Serial.println(HBT);
+    startTimeHBT = endTime; 
+  }
+  
 }
