@@ -131,10 +131,6 @@ void loop() {
     startTime =  endTime;
     }
   }//if ((loopDuration = endTime - startTime)>PauseMove)
-  else if ((Serial.availableForWrite()>62)&&(( HBT = (endTime - startTimeHBT))>PauseSend)){
-    //Serial.write('~');
-    Serial.println(HBT);
-    startTimeHBT = endTime; 
-  }
+
   
 }

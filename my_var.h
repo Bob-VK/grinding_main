@@ -2,7 +2,7 @@
 #define my_var
 unsigned long DnOnTime;
 unsigned long endTime, startTime;
-unsigned long          startTimeHBT;
+
 unsigned long loopDuration, PauseMove = 500000;
 
 #define FPSTR(pstr) (const __FlashStringHelper *)(pstr)
@@ -20,8 +20,7 @@ const int ledPin = 13; // Встроенный светодиод на плат�
 #define SetALLOWANCE "allowance"
 #define SetPause "SetPause"
 #define cmdStart "Start"
-#define PauseSend 7000
-int HBT;
+
 #define CmdResultOK " OK"
 
 String CmdStr;
