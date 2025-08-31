@@ -16,18 +16,27 @@ void setup() {
 
 void loop() {
 // ---- прием команд -----
-{
-  lenStrRead = Serial.available();
-  //ждем когда буфер стабилизируется
-  if (( lenStrRead> )&&(lenStrRead == OldlenStrRead)){
+static bool CmdNotCopmlit =true;
 
-    if(CountStableRead<CountStableReadOk){
-      CountStableRead++;
-      //Serial.println(CountStableRead);
-    }else{
-        CountStableRead = 0;
-        CmdStr = Serial.readString();
-        if (CmdStr.equals(HBT)){
+{
+        //CmdStr = Serial.readString();
+if(CmdNotCopmlit)
+
+  while((lenStrRead = Serial.available())>0){
+    char ReadChar = Serial.read();
+     if (ReadChar!= 10 ){
+      if (ReadChar!= 13){
+             CmdStr += ReadChar; 
+      }else{
+        CmdNotCopmlit = false;
+        break;
+      }
+
+     }
+
+  }else //обработка
+  {
+           if (CmdStr.equals(HBT)){
             Serial.write('~');
         }else{
           
@@ -99,12 +108,16 @@ void loop() {
               Serial.print(":");
               Serial.print(CmdParam,DEC);  
               Serial.println(CmdResult);
-        }//if (CmdStr.equals(HBT)) else
-            }//if ( lenStrRead> 0)&&(lenStrRead == OldlenStrRead)
+        }//if (CmdStr.equals(HBT)) else 
+        CmdStr = ""; //обнулить если обработка закончена
+        CmdNotCopmlit = true;
+  }//if(CmdNotComplit) else
+
+
         
       
-}
-OldlenStrRead = lenStrRead;
+
+
 }// end ---прием команд  -----  
   CurTime = micros(); // Сохраняем время окончания цикла
   if ((DurationMove = CurTime - EarlyTimeMove)>PauseMove)
