@@ -1,11 +1,11 @@
 #ifndef my_var
 #define my_var
 unsigned long DnOnTime;
-unsigned long EarlyTimeRead,EarlyTimeMove, CurTime;
+unsigned long EarlyTimeMove, CurTime;
 unsigned int  CountStableRead = 0;
 #define       CountStableReadOk 20
 unsigned long DurationMove, PauseMove               = 500000;
-unsigned long DurationdigitalRead, PausedigitalRead = 500100;
+
 #define FPSTR(pstr) (const __FlashStringHelper *)(pstr)
 
 // Устанавливаем номера пинов

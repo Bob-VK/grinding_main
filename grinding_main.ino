@@ -1,5 +1,8 @@
 
 #include "my_var.h"
+#include "debounce.h"
+#include "procedures.h"
+
 
 void setup() {
 
@@ -36,9 +39,9 @@ if(CmdNotCopmlit)
 
   }else //обработка
   {
-           if (CmdStr.equals(HBT)){
-            Serial.write('~');
-        }else{
+    if (CmdStr.equals(HBT)){
+      Serial.write('~');
+    }else{
           
         
           int PosSeparate  = CmdStr.indexOf(SEMICOLON);
@@ -99,8 +102,8 @@ if(CmdNotCopmlit)
               CmdResult = CmdResultOK;
           }// else  if  (CmdStr.equals(SetPause)) 
           else  if  (CmdStr.equals(cmdStart)){
-              Start = true;
-              CurCountStep = ALLOWANCE;
+              //Start = true;
+              StartMove (ALLOWANCE);
               CmdResult = CmdResultOK;
           }//else  if  (CmdStr.equals(Start))
                     
@@ -112,12 +115,6 @@ if(CmdNotCopmlit)
         CmdStr = ""; //обнулить если обработка закончена
         CmdNotCopmlit = true;
   }//if(CmdNotComplit) else
-
-
-        
-      
-
-
 }// end ---прием команд  -----  
   CurTime = micros(); // Сохраняем время окончания цикла
   if ((DurationMove = CurTime - EarlyTimeMove)>PauseMove)
@@ -157,9 +154,6 @@ if(CmdNotCopmlit)
     EarlyTimeMove =  CurTime;
     }
   }//if ((DurationMove = CurTime - EarlyTimeMove)>PauseMove)
+Debounce();
 
-  if ((DurationdigitalRead = CurTime - EarlyTimeRead)>PausedigitalRead){
-      EarlyTimeRead =  CurTime;
-
-  }
 }
