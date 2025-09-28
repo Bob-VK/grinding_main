@@ -1,15 +1,17 @@
 #ifndef procedures
 #define procedures
 #include <TimerOne.h>
+inline void StartMoveTimer1(int ALLOWANCE);
 inline void StartMove (int ALLOWANCE){
-              Start = true;
-              CurCountStep = ALLOWANCE; 
+/*               Start = true;
+              CurCountStep = ALLOWANCE;  */
+                StartMoveTimer1(ALLOWANCE);
 }
 inline void StepUpISR();
 inline void StepDnISR();
 inline void StepUp();
 inline void StepDn();
-inline void StartMoveTimer1(){
+inline void StartMoveTimer1(int ALLOWANCE){
     Timer1.initialize(400);
     CurCountStep = ALLOWANCE; 
     if (CurCountStep>0){

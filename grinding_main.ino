@@ -117,14 +117,14 @@ if(CmdNotCopmlit)
   }//if(CmdNotComplit) else
 }// end ---прием команд  -----  
   CurTime = micros(); // Сохраняем время окончания цикла
-  if ((DurationMove = CurTime - EarlyTimeMove)>PauseMove)
-  { 
-    if (Start){
-      if (NeedPrintSteps){
-        Serial.print(" Step: ");
+  if ((DurationMove = CurTime - EarlyTimeMove)>PauseMove){ 
+          if (NeedPrintSteps){
+        Serial.print(" left  - ");
         Serial.println(CurCountStep,DEC);
         NeedPrintSteps = false;
       }
+    if (Start){
+
       if (CurCountStep>0) {
         StepUp();
       }
