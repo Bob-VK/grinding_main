@@ -27,8 +27,8 @@ if(CmdNotCopmlit)
 
   while((lenStrRead = Serial.available())>0){
     char ReadChar = Serial.read();
-     if (ReadChar!= 10 ){
-      if (ReadChar!= 13){
+     if (ReadChar!= 13 ){
+      if (ReadChar!= 10){
              CmdStr += ReadChar; 
       }else{
         CmdNotCopmlit = false;
