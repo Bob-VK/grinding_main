@@ -120,29 +120,20 @@ if(CmdNotCopmlit)
   if ((DurationMove = CurTime - EarlyTimeMove)>PauseMove)
   { 
     if (Start){
-      if (CurCountStep>0) {
-        CurCountStep--;
-        OutDn = !OutDn;
-        digitalWrite(pin8, OutDn);
-        //  встроенный светодиод
-        digitalWrite(ledPin, OutDn);        
-        Serial.print(" left  - ");
+      if (NeedPrintSteps){
+        Serial.print(" Step: ");
         Serial.println(CurCountStep,DEC);
-
+        NeedPrintSteps = false;
+      }
+      if (CurCountStep>0) {
+        StepUp();
       }
       else if (CurCountStep<0){
-        CurCountStep++;
-        OutUp = !OutUp;
-        digitalWrite(pin9, OutUp);
-        //  встроенный светодиод
-        digitalWrite(ledPin, OutUp);
-        Serial.print(" left  - ");
-        Serial.println(CurCountStep,DEC);        
+        StepDn();
       }
       else{
         Start=false;
       }
-
     }  
     {// печать продолжительности цикла
     // Выводим результат в последовательный монитор
